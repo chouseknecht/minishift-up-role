@@ -69,7 +69,7 @@
   when: "'tar.gz' in asset_name"
 
 - set_fact: 
-    archive_path: "{{ asset_name | regex_replace('\.(tar\.gz|\.zip)', '') }}" 
+    archive_path: "{{ asset_name | regex_replace('\\.(tar\\.gz|\\.zip)', '') }}" 
 
 - debug: 
     msg: "Looking for binary - {{ temp_output.stdout }}/{{ archive_path }}/oc"
