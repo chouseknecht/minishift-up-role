@@ -41,7 +41,7 @@
 - name: Get the Linux asset
   include: get_linux_asset.yml
   with_items: "{{ assets.json }}"
-  when: assets is defined ansible_os_family != 'Darwin' and ansible_os_family != 'Windows'
+  when: assets is defined and ansible_os_family != 'Darwin' and ansible_os_family != 'Windows'
 
 - name: Should have an asset_name
   assert:
