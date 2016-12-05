@@ -77,6 +77,8 @@ None
 
 When you run the role, be sure to leave gather_facts set to a truthy value. Without facts, the role cannot determine your default IP address or OS family. 
 
+Below is a sample playbook that includes all of the default parameters. When you run the playbook, be sure to pass the ``--ask-sudo-pass`` option.
+
 ```
     ---
     - hosts: localhost
@@ -84,7 +86,7 @@ When you run the role, be sure to leave gather_facts set to a truthy value. With
       connection: local
       gather_facts: yes
       roles:
-        - role: cluster-up-role
+        - role: chousknecht.cluster-up-role
           openshift_github_user: openshift
           openshift_github_name: origin
           openshift_github_url: https://api.github.com/repos
@@ -95,6 +97,13 @@ When you run the role, be sure to leave gather_facts set to a truthy value. With
           openshift_volume_path: "{{ lookup('env','HOME') }}/volumes/project/data"
           openshift_hostname: local.openshift
           openshift_recreate: no
+```
+
+Assuming you saved the above playbook to a file called *cluster-up.yml*, here's an example of how you might run it:
+
+```
+# Start the playbook
+$ ansible-container -i inventory --ask-sudo-pass cluster-up.yml
 ```
 
 ## License
