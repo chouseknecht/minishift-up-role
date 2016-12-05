@@ -77,7 +77,9 @@ None
 
 When you run the role, be sure to leave gather_facts set to a truthy value. Without facts, the role cannot determine your default IP address or OS family. 
 
-Below is a sample playbook that includes all of the default parameters. When you run the playbook, be sure to pass the ``--ask-sudo-pass`` option.
+Below is a sample playbook that includes all of the default parameters. You'll find this exact example in the *files* folder, called *cluster-up.yml*. Copy, and adjust it to fit your environment.
+
+When you run the playbook, be sure to pass the ``--ask-sudo-pass`` option.
 
 ```
     ---
@@ -99,10 +101,19 @@ Below is a sample playbook that includes all of the default parameters. When you
           openshift_recreate: no
 ```
 
-Assuming you saved the above playbook to a file called *cluster-up.yml*, here's an example of how you might run it:
+After you install the role, copy *file/cluster-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. Here's an example of what that might look like:
 
 ```
-# Start the playbook
+# Install the role 
+$ ansible-galaxy install chouseknecht.cluster-up-role
+
+# Copy the playbook from your roles path to the current working directory 
+$ cp ${ANSIBLE_ROLES_PATH}/chouseknecht.cluster-up-role/files/cluster-up.yml .
+
+# Create a localhost inventory file
+$ echo "localhost">./inventory
+
+# Run the playbook
 $ ansible-container -i inventory --ask-sudo-pass cluster-up.yml
 ```
 
