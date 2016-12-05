@@ -1,5 +1,5 @@
 - name: Create a temp dir
-  command: mktemp -d -t ansible-oc-objects
+  command: mktemp -d -t ansible.XXXXXXXXXX
   register: temp_output
 
 - name: Set tmp_path

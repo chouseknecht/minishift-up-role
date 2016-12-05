@@ -48,7 +48,7 @@
     that: asset_name is defined
 
 - name: Create a temp dir
-  command: mktemp -d -t ansible-oc-install 
+  command: mktemp -d -t ansible.XXXXXXXXXX
   register: temp_output
 
 - name: Download the asset
