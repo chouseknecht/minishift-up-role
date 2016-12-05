@@ -68,9 +68,15 @@
     chdir: "{{ temp_output.stdout }}"
   when: "'tar.gz' in asset_name"
 
+- set_fact: 
+    archive_path: "{{ asset_name | regex_replace('\.(tar\.gz|\.zip)', '') }}" 
+
+- debug: 
+    msg: "Looking for binary - {{ temp_output.stdout }}/{{ archive_path }}/oc"
+
 - name: Move the oc executable to the requested directory 
   copy:
-    src: "{{ temp_output.stdout }}/oc" 
+    src: "{{ temp_output.stdout }}/{{ archive_path }}/oc" 
     dest: "{{ openshift_client_dest }}/oc"  
     mode: 0775 
   become: yes
