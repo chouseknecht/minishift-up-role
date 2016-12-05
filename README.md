@@ -29,7 +29,7 @@ openshift_github_url: https://api.github.com/repos
 > The GitHub API endpoint to use.
 
 openshift_release_tag_name: "v1.3.1"
-> The desired relase of `oc` to download.
+> The tag for the desired relase of the `oc` binary. If none provided, the latest release will be installed.
 
 openshift_client_dest: /usr/local/bin  
 > The directory where `oc` will be installed. Needs to be something in your PATH.
