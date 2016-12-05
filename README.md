@@ -86,7 +86,7 @@ Below is a sample playbook that includes all of the default parameters. When you
       connection: local
       gather_facts: yes
       roles:
-        - role: chousknecht.cluster-up-role
+        - role: chouseknecht.cluster-up-role
           openshift_github_user: openshift
           openshift_github_name: origin
           openshift_github_url: https://api.github.com/repos
