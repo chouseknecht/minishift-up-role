@@ -22,7 +22,7 @@ script:
 
   # Run tests
   - cd tests
-  - ansible-playbook --syntax-chck test.yml
+  - ansible-playbook --syntax-check test.yml
 
 notifications:
   email: false
