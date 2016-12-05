@@ -1,0 +1,38 @@
+---
+- name: Get the IP address 
+  set_fact:
+    default_ip_address: "{{ ansible_default_ipv4.address }}"
+
+- name: If OSX, install socat
+  homebrew:
+    name: socat
+  when: ansible_os_family == 'Darwin'
+
+- name: Add hostname
+  include: add_hostname.yml 
+
+- name: Check if oc binary exists
+  stat:
+    path: "{{ openshift_client_dest }}/oc" 
+  register: oc_client
+
+- name: Install the oc client
+  include: install_client.yml
+  when: not oc_client.stat.exists or openshift_force_client_install 
+
+- name: Check if running
+  include: isrunning.yml 
+
+- name: Run oc cluster up
+  command: oc cluster up
+  register: output         
+  ignore_errors: yes
+
+- name: Cluster up 
+  include: cluster_up.yml
+  
+- name: Give cluster-admin to developer
+  include: grant_admin.yml 
+
+- name: Create objects
+  include: create_objects.yml 

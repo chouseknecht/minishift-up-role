@@ -1,0 +1,26 @@
+
+apiVersion: v1
+kind: Route
+metadata:
+  name: registry-access
+spec:
+  host: {{ openshift_hostname }} 
+  to:
+    kind: Service
+    name: docker-registry
+    weight: 100
+  port:
+    targetPort: 5000-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+status:
+  ingress:
+    -
+      host: {{ openshift_hostname }}
+      routerName: router
+      conditions:
+        -
+          type: Admitted
+          status: 'True'
+

@@ -1,0 +1,29 @@
+- name: Make sure dest directory exists
+  file:
+    path: "{{ kompose_dest }}"
+    state: directory
+  when: item.name == asset_name
+
+- name: Set filename
+  set_fact:
+    dest_name: "{{ kompose_dest }}/{{ item.browser_download_url | basename }}"
+  when: item.name == asset_name
+
+- name: Download matching asset
+  get_url: 
+    url: "{{ item.browser_download_url }}"
+    dest: "{{ dest_name }}"
+  when: item.name == asset_name
+
+- name: Unarchive the asset
+  command: "tar -xvf {{ item.browser_download_url | basename }} --strip 1"
+  args:
+    chdir: "{{ kompose_dest }}"
+  when: item.name == asset_name
+
+- name: Remove the archive
+  file:
+    path: "{{ dest_name }}"
+    state: absent
+  when: item.name == asset_name
+

@@ -1,0 +1,26 @@
+- name: Remove hostname
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '{{ openshift_hostname }}' 
+    state: absent 
+  become: yes
+  become_user: root
+    
+- name: Add hostname
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^{{ default_ip_address}}'
+    line: "{{ default_ip_address }}  {{ openshift_hostname }}"
+  become: yes
+  become_user: root
+
+- name: Wait for /etc/hosts change to take effect
+  wait_for:
+    timeout: 5 
+
+- name: Ping openshift_hostname
+  command: "ping -c 3 {{ openshift_hostname }}"
+  register: ping
+
+- assert:
+    that: "'3 packets received' in ping.stdout"

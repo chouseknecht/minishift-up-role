@@ -1,0 +1,20 @@
+- block:
+  - debug:
+      var: output.stdout_lines
+  - debug:
+      msg: "Add the above IP range and '{{ openshift_hostname }}' to your Docker insecure registry settings, and then re-run this palybook."
+  - assert:
+      that: true == false
+  when: output.failed is defined and output.failed and 'insecure-registry' in output.stdout
+
+- block:
+  - debug:
+      var: output.stdout_lines
+  - debug:
+      msg: "`oc cluster up` failed to start. Once you are able to resolve the issue, then re-run the playbook."
+  - assert:
+      that: true == false
+  when: output.failed is defined and output.failed
+
+- debug:
+    var: output.stdout_lines

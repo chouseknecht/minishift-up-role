@@ -1,0 +1,33 @@
+- name: Create a temp dir
+  command: mktemp -d -t ansible-oc-objects
+  register: temp_output
+
+- name: Set tmp_path
+  set_fact:
+    tmp_path: "{{ temp_output.stdout }}"
+
+- name: Template route.yml 
+  template: 
+    src: route.j2.yml
+    dest: "{{ tmp_path }}/route.yml" 
+
+- name: Template pv.yml 
+  template: 
+    src: pv.j2.yml
+    dest: "{{ tmp_path }}/pv.yml" 
+
+- name: Create the route
+  command: oc create -f route.yml 
+  args:
+    chdir: "{{ tmp_path }}" 
+
+- name: Create the volume 
+  command: oc create -f pv.yml 
+  args:
+    chdir: "{{ tmp_path }}" 
+
+- name: Remove the temp directory
+  file:
+    path: "{{ tmp_path }}"
+    state: absent
+
