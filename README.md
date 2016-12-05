@@ -1,7 +1,12 @@
-cluster-up-role
-===============
+# cluster-up-role
 
-Autmotes the steps for installing a local OpenShift cluster. Created specifically to support the demo and testing needs of the [Ansible Container project](http://docs.ansible.com/ansible-container/configure_openshift.html), it performs the following tasks:
+[![Build Status](https://travis-ci.org/chouseknecht/cluster-up-role.svg?branch=master)](https://travis-ci.org/chouseknecht/cluster-up-role)
+
+Install the OpenShift client and create a local instance using `oc cluster up`. 
+
+Created to support the demo and testing needs of [Ansible Container ](https://github.com/ansible/ansible-container) by automating the tasks in the [Install and Congigure OpenShift guide](http://docs.ansible.com/ansible-container/configure_openshift.html). 
+
+Specifically, it performs the following tasks:
 
 - Downloads and installs the oc client
 - Installs `socat`, if running on OSX
@@ -11,14 +16,26 @@ Autmotes the steps for installing a local OpenShift cluster. Created specificall
 - Creates a route to expose the local registry
 - Creates a persistent volume
 
-Requirements
-------------
+### Supported platforms and testing
 
-- Docker or Docker fro Mac
-- root access - required to update /etc/hosts and install the oc client to something in your PATH (i.e. /usr/local/bin)
+To date this role has really only been tested on OSX using Docker for Mac. And it actually almost works on Travis, which is an Ubuntu platform. So with that in mind, if you're attempting to use it not on a OSX, you're very likely to discover a bug. If you do, please, open an issue, and let us know, so that we can keep the role up to date and make adjustements. 
 
-Role Variables
---------------
+### Hostname
+
+When the cluster is created, it gets associated with your local network IP address. If you're working on a laptop or other mobile device, you may find yourself having to recreate the cluster whenver you hop to a new network. To make life a little less painful a hostname gets created that points to your current IP address. You can use this hostname later, when you're ready to push images to the local registry.
+
+Use the *openshift_hostname* parameter to set the actual name. Each time you run the playbook, the current line in /etc/hosts for the hostname will be removed and re-added with the current IP address.
+
+## Requirements
+
+- Docker or Docker for Mac
+- root access 
+    - required to update /etc/hosts
+    - kill leftover socat processes
+    - install the oc client to somewhere useful and already in your PATH (i.e. /usr/local/bin)
+
+## Role Variables
+
 openshift_github_user: openshift
 > The owner of the GitHub repo where oc client download targets can be found
 
@@ -50,15 +67,14 @@ openshift_recreate: no
 > If a cluster is already running, should it be killed and recreated? 
 
 openshift_up_options: ''
-> Add any options you want to pass to the `oc cluster up` command. Separate multiple options with a space, just as you would on the command line.
+> Add any options you want to pass to `oc cluster up`. Separate multiple options with a space, just as you would on the command line.
 
-Dependencies
-------------
+## Dependencies
 
 None
 
-Example Playbook
-----------------
+## Example Playbook
+
 When you run the role, be sure to leave gather_facts set to a truthy value. Without facts, the role cannot determine your default IP address or OS family. 
 
 ```
@@ -81,12 +97,10 @@ When you run the role, be sure to leave gather_facts set to a truthy value. With
           openshift_recreate: no
 ```
 
-License
--------
+## License
 
 Apache v2
 
-Author 
-------
+## Author 
 
 [@chouseknecht](https://github.com/chouseknecht)
