@@ -49,6 +49,9 @@ openshift_hostname: local.openshift
 openshift_recreate: no
 > If a cluster is already running, should it be killed and recreated? 
 
+openshift_up_options: ''
+> Add any options you want to pass to the `oc cluster up` command. Separate multiple options with a space, just as you would on the command line.
+
 Dependencies
 ------------
 
@@ -66,6 +69,16 @@ When you run the role, be sure to leave gather_facts set to a truthy value. With
       gather_facts: yes
       roles:
         - role: cluster-up-role
+          openshift_github_user: openshift
+          openshift_github_name: origin
+          openshift_github_url: https://api.github.com/repos
+          openshift_release_tag_name: "v1.3.1"
+          openshift_client_dest: /usr/local/bin  
+          openshift_force_client_install: no
+          openshift_volume_name: project-data
+          openshift_volume_path: "{{ lookup('env','HOME') }}/volumes/project/data"
+          openshift_hostname: local.openshift
+          openshift_recreate: no
 ```
 
 License

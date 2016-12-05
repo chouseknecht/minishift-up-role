@@ -9,3 +9,4 @@ openshift_volume_name: project-data
 openshift_volume_path: "{{ lookup('env','HOME') }}/volumes/project/data"
 openshift_hostname: local.openshift
 openshift_recreate: no
+openshift_up_options: ''

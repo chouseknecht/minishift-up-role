@@ -24,7 +24,7 @@
   include: isrunning.yml 
 
 - name: Run oc cluster up
-  command: oc cluster up
+  command: "oc cluster up {{ openshift_up_options }}"
   register: output         
   ignore_errors: yes
 

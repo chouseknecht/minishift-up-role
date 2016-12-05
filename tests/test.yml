@@ -5,3 +5,4 @@
   gather_facts: yes
   roles:
     - role: cluster-up-role
+      openshift_up_optons: "--skip-registry-check"
