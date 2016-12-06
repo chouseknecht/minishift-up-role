@@ -26,6 +26,10 @@ When the cluster is created, it gets associated with your local network IP addre
 
 Use the *openshift_hostname* parameter to set the actual name. Each time you run the playbook, the current line in /etc/hosts for the hostname will be removed and re-added with the current IP address.
 
+### Insecure registry
+
+If you have not added the insecure registry option to Docker, the role will error the first time you execute it. It will provide a message letting you know the subnet that needs to be added. You'll also need to add the *openshift_hostname* value. By default the value is *local.openshift*. After making the change and restarting Docker, run the role again.
+
 ## Requirements
 
 - Docker or Docker for Mac
