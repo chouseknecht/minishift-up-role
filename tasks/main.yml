@@ -3,36 +3,28 @@
   set_fact:
     default_ip_address: "{{ ansible_default_ipv4.address }}"
 
-- name: If OSX, install socat
-  homebrew:
-    name: socat
-  when: ansible_os_family == 'Darwin'
-
-- name: Add hostname
-  include: add_hostname.yml 
-
-- name: Check if oc binary exists
+- name: Check if minishift binary exists
   stat:
-    path: "{{ openshift_client_dest }}/oc" 
-  register: oc_client
+    path: "{{ minishift_dest }}/minishift"
+  register: minishift_client
 
-- name: Install the oc client
+- name: Install minishift 
   include: install_client.yml
-  when: not oc_client.stat.exists or openshift_force_client_install 
+  when: not minishift_client.stat.exists or minishift_force_install 
 
 - name: Check if running
   include: isrunning.yml 
 
-- name: Run oc cluster up
-  command: "oc cluster up {{ openshift_up_options }}"
+- name: Run minishift
+  command: "minishift {{ minishift_up_options | join(' ') }}"
   register: output         
   ignore_errors: yes
 
-- name: Cluster up 
-  include: cluster_up.yml
-  
 - name: Give cluster-admin to developer
   include: grant_admin.yml 
 
+- name: Set volume path permissions
+  command: "minishift ssh chmod 777 {{ minishift_volume['path'] }}"
+
 - name: Create objects
-  include: create_objects.yml 
+  include: create_objects.yml

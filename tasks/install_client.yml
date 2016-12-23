@@ -1,24 +1,24 @@
 - name: Get the tagged release
   uri:
-    url: "{{ openshift_github_url }}/{{ openshift_github_user }}/{{ openshift_github_name }}/releases/tags/{{ openshift_release_tag_name }}"
+    url: "{{ minishift_github_url }}/{{ minishift_repo }}/releases/tags/{{ minishift_release_tag_name }}"
   register: release
-  when: openshift_release_tag_name is defined
+  when: minishit_release_tag_name is defined
 
 - name: Set release
   set_fact:
     assets_url: "{{ release.json.assets_url }}"
-  when: openshift_release_tag_name is defined
+  when: minishift_release_tag_name is defined
 
 - name: Get the latest release
   uri:
-    url: "{{ openshift_github_url }}/{{ openshift_github_user }}/{{ openshift_github_name }}/releases/latest"
+    url: "{{ minishift_github_url }}/{{ minishift_repo }}/releases/latest"
   register: release
-  when: openshift_release_tag_name is not defined
+  when: minishift_release_tag_name is not defined
 
 - name: Set release
   set_fact:
     assets_url: "{{ release.json.assets_url }}"
-  when: openshift_release_tag_name is not defined
+  when: minishift_release_tag_name is not defined
 
 - name: Should have an assets_url 
   assert:
@@ -74,10 +74,10 @@
 - debug: 
     msg: "Looking for binary - {{ temp_output.stdout }}/{{ archive_path }}/oc"
 
-- name: Move the oc executable to the requested directory 
+- name: Move the executable to the requested directory
   copy:
-    src: "{{ temp_output.stdout }}/{{ archive_path }}/oc" 
-    dest: "{{ openshift_client_dest }}/oc"  
+    src: "{{ temp_output.stdout }}/{{ archive_path }}/minishift"
+    dest: "{{ minishift_dest }}/minishift"
     mode: 0775 
   become: yes
   become_user: root 

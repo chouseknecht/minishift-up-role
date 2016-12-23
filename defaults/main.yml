@@ -1,12 +1,15 @@
 ---
-openshift_github_user: openshift
-openshift_github_name: origin
-openshift_github_url: https://api.github.com/repos
-openshift_release_tag_name: "v1.3.1"
-openshift_client_dest: /usr/local/bin  
-openshift_force_client_install: no
-openshift_volume_name: project-data
-openshift_volume_path: "{{ lookup('env','HOME') }}/volumes/project/data"
-openshift_hostname: local.openshift
-openshift_recreate: no
-openshift_up_options: ''
+minishift_repo: minishift/minishift 
+minishift_github_url: https://api.github.com/repos
+minishit_release_tag_name: "v1.0.0-beta.1"
+minishift_dest: /usr/local/bin  
+minishift_force_install: no
+minishift_volume:
+  name: pv0001
+  path: /data/pv0001/
+  size: 5Gi
+minishift_recreate: no
+minishift_up_options:
+  - insecure-registry 172.30.0.0/16
+  - insecure-registry minishift
+  - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso

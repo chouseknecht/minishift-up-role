@@ -1,10 +1,9 @@
-
 apiVersion: v1
 kind: Route
 metadata:
   name: registry-access
 spec:
-  host: {{ openshift_hostname }} 
+  host: {{ minishift_hostname }}
   to:
     kind: Service
     name: docker-registry
@@ -17,7 +16,7 @@ spec:
 status:
   ingress:
     -
-      host: {{ openshift_hostname }}
+      host: {{ minishift_hostname }}
       routerName: router
       conditions:
         -

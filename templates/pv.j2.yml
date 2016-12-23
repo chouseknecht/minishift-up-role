@@ -1,14 +1,13 @@
-
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ openshift_volume_name }} 
+  name: {{ minishift_volume['name'] }}
 spec:
   capacity:
-    storage: 10Gi 
+    storage: {{ minishift_volume['size'] }}
   accessModes:
     - ReadWriteOnce
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: {{ openshift_volume_path }} 
+    path: {{ minishift_volume['path'] }}
