@@ -2,5 +2,5 @@
   set_fact:
     asset_url: "{{ item.browser_download_url }}"
     asset_name: "{{ item.browser_download_url | basename }}"
-  when: "'darwin-amd64.tgz' in item.name"
+  when: item.name | search('darwin-amd64.tgz$')
 

@@ -16,15 +16,22 @@
   include: isrunning.yml 
 
 - name: Run minishift
-  command: "minishift {{ minishift_up_options | join(' ') }}"
+  command: "minishift start --{{ minishift_start_options | join(' --') }}"
   register: output         
-  ignore_errors: yes
 
 - name: Give cluster-admin to developer
   include: grant_admin.yml 
 
-- name: Set volume path permissions
-  command: "minishift ssh chmod 777 {{ minishift_volume['path'] }}"
+- name: Create volume path
+  file:
+    path: "{{ minishift_volume['path'] }}"
+    state: directory
+    mode: 0777 
 
 - name: Create objects
   include: create_objects.yml
+
+- name: Show output
+  debug:
+    var: output.stdout_lines
+

@@ -60,24 +60,22 @@
   command: "unzip {{ asset_name }}" 
   args:
     chdir: "{{ temp_output.stdout }}"
-  when: "'zip' in asset_name"
+  when: asset_name | search('zip$')
 
 - name: Untar the archive
   command: "tar -xvzf {{ asset_name }}" 
   args:
     chdir: "{{ temp_output.stdout }}"
-  when: "'tar.gz' in asset_name"
-
-- set_fact: 
-    archive_path: "{{ asset_name | regex_replace('\\.(tar\\.gz|\\.zip)', '') }}" 
+  when: asset_name | search('tgz$')
 
 - debug: 
-    msg: "Looking for binary - {{ temp_output.stdout }}/{{ archive_path }}/oc"
+    msg: "Looking for binary - {{ temp_output.stdout }}/minishift"
 
 - name: Move the executable to the requested directory
   copy:
-    src: "{{ temp_output.stdout }}/{{ archive_path }}/minishift"
+    src: "{{ temp_output.stdout }}/minishift"
     dest: "{{ minishift_dest }}/minishift"
+    remote_src: yes
     mode: 0775 
   become: yes
   become_user: root 
