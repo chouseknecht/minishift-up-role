@@ -6,7 +6,7 @@ minishift_dest: /usr/local/bin
 minishift_force_install: no 
 minishift_volume:
   name: pv0001
-  path: /data/pv0001/
+  path: /home/docker/pv0001/
   size: 5Gi
 minishift_recreate: no
 minishift_start_options:

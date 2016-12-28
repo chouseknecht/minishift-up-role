@@ -23,10 +23,10 @@
   include: grant_admin.yml 
 
 - name: Create volume path
-  file:
-    path: "{{ minishift_volume['path'] }}"
-    state: directory
-    mode: 0777 
+  command: minishift ssh "sudo mkdir -m 0777 -p {{ minishift_volume['path'] }}"
+
+- name: Set volume ownership
+  command: minishift ssh "sudo chown docker:staff {{ minishift_volume['path'] }}"
 
 - name: Create objects
   include: create_objects.yml

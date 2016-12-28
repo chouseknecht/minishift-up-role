@@ -11,7 +11,7 @@
       minishift_force_install: yes
       minishift_volume:
         name: pv0001
-        path: /Users/chouseknecht/pv0001/
+        path: /data/pv0001/
         size: 5Gi
       minishift_recreate: yes 
       minishift_start_options:
