@@ -39,8 +39,10 @@ galaxy_info:
     versions:
     - 10.11
   - name: Fedora
+    versions:
     - all
   - name: Ubuntu 
+    versions:
     - all 
 
   galaxy_tags:
