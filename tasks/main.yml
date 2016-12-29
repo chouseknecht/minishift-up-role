@@ -3,6 +3,9 @@
   set_fact:
     default_ip_address: "{{ ansible_default_ipv4.address }}"
 
+- name: Install Docker machine driver 
+  include: "{{ ansible_os_family }}_driver.yml"
+
 - name: Check if minishift binary exists
   stat:
     path: "{{ minishift_dest }}/minishift"

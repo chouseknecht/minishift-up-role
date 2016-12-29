@@ -1,0 +1,27 @@
+# Darwin_driver.yml 
+
+- name: Check if docker-machine-driver-xhyve is installed
+  command: brew info --installed docker-machine-driver-xhyve
+  register: output
+
+- name: Install docker-machine-driver-xhyve 
+  homebrew: 
+    name: docker-machine-driver-xhyve
+    state: present
+  when: "'Not installed' in output.stdout" 
+
+- name: Get brew prefix
+  command: brew --prefix
+  register: prefix
+
+- name: Set owner for docker-machine-driver-xyhve
+  command: "chown root:wheel {{ prefix.stdout }}/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve"
+  become: yes
+  become_user: root
+  when: "'Not installed' in output.stdout" 
+
+- name: Set permissions for docker-machine-driver-xhyve
+  command: "chmod u+s {{ prefix.stdout }}/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve" 
+  become: yes
+  become_user: root
+  when: "'Not installed' in output.stdout" 

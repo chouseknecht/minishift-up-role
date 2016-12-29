@@ -1,0 +1,30 @@
+# RedHat_driver.yml
+
+- name: Downlodad the KVM driver
+  geturl:
+    url: https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.7.0/docker-machine-driver-kvm
+    dest: /usr/local/bin/docker-machine-driver-kvm
+    mode: 0755
+  become: yes
+  become_user: root
+
+- name: Install packages 
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - libvirt
+  - qemu-kvm  
+
+- name: Get current user
+  command: whoami
+  register: output   
+
+- name: Add currnt uer to libvirtd group
+  user:
+    name: "{{ output.stdout }}"
+    groups: libvirtd
+    append: yes 
+  become: yes
+  become_user: root
+
