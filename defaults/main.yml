@@ -3,12 +3,12 @@ minishift_repo: minishift/minishift
 minishift_github_url: https://api.github.com/repos
 minishift_release_tag_name: "v1.0.0-beta.1"
 minishift_dest: /usr/local/bin  
-minishift_force_install: no 
+minishift_force_install: yes
 minishift_volume:
   name: pv0001
   path: /home/docker/pv0001/
   size: 5Gi
-minishift_recreate: no
+minishift_recreate: yes
 minishift_start_options:
   - insecure-registry 172.30.0.0/16
   - insecure-registry minishift

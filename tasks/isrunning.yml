@@ -18,3 +18,12 @@
 - name: Shutdown minishift
   command: minishift stop
   when: minishift_state.stdout == 'Running'
+
+- name: Deleting minishift
+  command: minishift delete
+  when: minishift_state.stdout == 'Running'
+
+- name: Remove ~/.minishift
+  file: 
+    path: ~/.minishift
+    state: absent

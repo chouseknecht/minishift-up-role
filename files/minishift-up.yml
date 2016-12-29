@@ -1,0 +1,21 @@
+---
+- name: Install minishift
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  roles:
+    - role: minishift-up-role
+      minishift_repo: minishift/minishift 
+      minishift_github_url: https://api.github.com/repos
+      minishit_release_tag_name: "v1.0.0-beta.1"
+      minishift_dest: /usr/local/bin  
+      minishift_force_install: yes
+      minishift_volume:
+        name: pv0001
+        path: /data/pv0001/
+        size: 5Gi
+      minishift_recreate: yes 
+      minishift_start_options:
+      - insecure-registry 172.30.0.0/16
+      - insecure-registry minishift
+      - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
