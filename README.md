@@ -61,8 +61,9 @@ minishift_force_install: yes
 
 > Overwrite any existing minishift binary found at {{ minishift_dest }}
 
-```
 minishift_volume:
+
+```
    name: pv0001
    path: /home/docker/pv0001/
    size: 5Gi
@@ -78,8 +79,9 @@ minishift_delete: no
 
 > When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
 
-```
 minishift_start_options:
+
+```
   - insecure-registry 172.30.0.0/16
   - insecure-registry minishift
   - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
