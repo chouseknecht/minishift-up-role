@@ -2,22 +2,22 @@
 
 [![Build Status](https://travis-ci.org/chouseknecht/minishift-up-role.svg?branch=master)](https://travis-ci.org/chouseknecht/minishift-up-role)
 
-Install minishift on OSX, Red Hat Linux, and Debian.
+Installs [minishift](https://github.com/minishift/minishift), and the [OpenShift client](https://github.com/openshift/origin), and creates a running minishift instance.
 
-Created to support the demo and testing needs of [Ansible Container ](https://github.com/ansible/ansible-container) by automating the tasks in the [Install and Congigure OpenShift guide](http://docs.ansible.com/ansible-container/configure_openshift.html). 
-
-Specifically, it performs the following tasks:
+Performs the following tasks:
 
 - Downloads and installs the latest minishift
 - Downloads and installs the OpenShift client
-- Installs the Docker Machine driver for either KVM or Xhyve, depending on the OS
+- Installs the Docker Machine driver
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
 - Adds a persistent volume
 
-## Supported platforms and testing
+Supported platforms: 
 
-To date this role has been tested on OSX and Fedora 25 Workstation. So with that in mind, if you're attempting to use this on a different platform, you may discover a bug or two. Please open an issue, or submit a PR, for any bugs, and help us keep the role up to date. 
+- Debian
+- Red Hat
+- OSX
 
 ## Prerequisites 
 
