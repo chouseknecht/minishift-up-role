@@ -56,32 +56,45 @@ minishift_dest: /usr/local/bin
 minishift_force_install: yes
 > Overwrite any existing minishift binary found at {{ minishift_dest }}
 
-minishift_volume:
+#### minishift_volume:
+
+Object of volume attributes including the following:
+
+```
   name: pv0001
   path: /home/docker/pv0001/
   size: 5Gi
-> The name, path, and size of the Persistent Volume to create on the new minishift instance
+```
 
-minishift_recreate: yes
-> Stop and recreate the existing minishift instance.
+#### minishift_recreate: yes
 
-minishift_delete: no
-> When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
+Stop and recreate the existing minishift instance.
 
-minishift_start_options:
-> Array of `minishift start` command line options. Defaults to the following:
->  - insecure-registry 172.30.0.0/16
->  - insecure-registry minishift
->  - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
+#### minishift_delete: no
 
-openshift_repo: openshift/origin
-> GitHub repo for retrieving the OpenShift client.
+When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
 
-openshift_client_dest: /usr/local/bin
-> Where to install the OpenShift client binary.
+#### minishift_start_options:
 
-openshift_force_client_install: yes
-> Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
+Array of `minishift start` command line options. Defaults to the following:
+
+```
+- insecure-registry 172.30.0.0/16
+- insecure-registry minishift
+- iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
+```
+
+#### openshift_repo: openshift/origin
+
+GitHub repo for retrieving the OpenShift client.
+
+#### openshift_client_dest: /usr/local/bin
+
+Where to install the OpenShift client binary.
+
+#### openshift_force_client_install: yes
+
+Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
 
 ## Dependencies
 
