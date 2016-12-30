@@ -2,7 +2,7 @@
   uri:
     url: "{{ minishift_github_url }}/{{ minishift_repo }}/releases/tags/{{ minishift_release_tag_name }}"
   register: release
-  when: minishit_release_tag_name is defined
+  when: minishift_release_tag_name is defined
 
 - name: Set release
   set_fact:
