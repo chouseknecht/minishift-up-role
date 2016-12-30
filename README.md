@@ -41,27 +41,27 @@ To date this role has been tested on OSX and Fedora 25 Workstation. So with that
 
 ## Defaults
 
-minishift_repo: minishift/minishift 
+**minishift_repo: minishift/minishift**
 
 > Repo where the minishift binary can be found
 
-minishift_github_url: https://api.github.com/repos
+** minishift_github_url: https://api.github.com/repos**
 
 > URL to access GitHub API. 
 
-minishift_release_tag_name: "v1.0.0-beta.1"
+**minishift_release_tag_name: "v1.0.0-beta.1"**
 
 > The minishift release to install.
 
-minishift_dest: /usr/local/bin  
+**minishift_dest: /usr/local/bin**
 
 > Where to install the minishift binary.
 
-minishift_force_install: yes
+**minishift_force_install: yes**
 
 > Overwrite any existing minishift binary found at {{ minishift_dest }}
 
-minishift_volume:
+**minishift_volume:**
 
 ```
    name: pv0001
@@ -71,15 +71,15 @@ minishift_volume:
 
 >  Object of volume attributes including the following:
 
-minishift_recreate: yes
+**minishift_recreate: yes**
 
 > Stop and recreate the existing minishift instance.
 
-minishift_delete: no
+**minishift_delete: no**
 
 > When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
 
-minishift_start_options:
+**minishift_start_options:**
 
 ```
   - insecure-registry 172.30.0.0/16
@@ -90,15 +90,15 @@ minishift_start_options:
 > Options to pass to `minishift start`.
 
 
-openshift_repo: openshift/origin
+**openshift_repo: openshift/origin**
 
 > GitHub repo for retrieving the OpenShift client.
 
-openshift_client_dest: /usr/local/bin
+**openshift_client_dest: /usr/local/bin**
 
 > Where to install the OpenShift client binary.
 
-openshift_force_client_install: yes
+**openshift_force_client_install: yes**
 
 > Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
 
