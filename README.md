@@ -68,13 +68,11 @@ minishift_recreate: yes
 minishift_delete: no
 > When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
 
-```
 minishift_start_options:
-  - insecure-registry 172.30.0.0/16
-  - insecure-registry minishift
-  - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
-```
-> Any commandline options to pass to `minishift start`.
+> Array of `minishift start` command line options. Defaults to the following:
+>  - insecure-registry 172.30.0.0/16
+>  - insecure-registry minishift
+>  - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
 
 openshift_repo: openshift/origin
 > GitHub repo for retrieving the OpenShift client.
