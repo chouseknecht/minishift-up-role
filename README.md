@@ -89,7 +89,6 @@ Supported platforms:
 
 > Options to pass to `minishift start`.
 
-
 **openshift_repo:** openshift/origin
 
 > GitHub repo for retrieving the OpenShift client.
@@ -101,10 +100,6 @@ Supported platforms:
 **openshift_force_client_install:** yes
 
 > Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
-
-## Dependencies
-
-None
 
 ## Example Playbook
 
@@ -153,6 +148,10 @@ $ echo "localhost">./inventory
 # Run the playbook
 $ ansible-container -i inventory --ask-sudo-pass minishift-up.yml
 ```
+
+## Dependencies
+
+None
 
 ## License
 
