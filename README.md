@@ -1,6 +1,6 @@
-# minishift-up-role
-
 [![Build Status](https://travis-ci.org/chouseknecht/minishift-up-role.svg?branch=master)](https://travis-ci.org/chouseknecht/minishift-up-role)
+
+# minishift-up-role
 
 Installs [minishift](https://github.com/minishift/minishift), and the [OpenShift client](https://github.com/openshift/origin), and creates a running minishift instance.
 
