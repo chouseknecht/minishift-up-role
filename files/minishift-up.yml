@@ -4,7 +4,7 @@
   connection: local
   gather_facts: yes
   roles:
-    - role: minishift-up-role
+    - role: chouseknecht.minishift-up-role
       minishift_repo: minishift/minishift 
       minishift_github_url: https://api.github.com/repos
       minishit_release_tag_name: "v1.0.0-beta.1"
@@ -14,7 +14,7 @@
         name: pv0001
         path: /data/pv0001/
         size: 5Gi
-      minishift_recreate: yes 
+      minishift_restart: yes 
       minishift_delete: no
       minishift_start_options:
       - insecure-registry 172.30.0.0/16

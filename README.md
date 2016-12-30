@@ -71,7 +71,7 @@ To date this role has been tested on OSX and Fedora 25 Workstation. So with that
 
 >  Object of volume attributes including the following:
 
-**minishift_recreate:** yes
+**minishift_restart:** yes
 
 > Stop and recreate the existing minishift instance.
 
@@ -108,11 +108,7 @@ None
 
 ## Example Playbook
 
-When you run the role, be sure to leave gather_facts set to a truthy value. Without facts, the role cannot determine your OS family. 
-
-Below is a sample playbook that includes all of the default parameters. You'll find this exact example in the *files* folder, called *minishift-up.yml*. Copy, and adjust it to fit your environment.
-
-When you run the playbook, be sure to pass the ``--ask-sudo-pass`` option.
+Below is a sample playbook that includes all of the default parameters. You'll find this exact example in [files/minishift-up.yml](files/minishift-up.yml):
 
 ```
 ---
@@ -121,7 +117,7 @@ When you run the playbook, be sure to pass the ``--ask-sudo-pass`` option.
   connection: local
   gather_facts: yes
   roles:
-    - role: minishift-up-role
+    - role: chouseknecht.minishift-up-role
       minishift_repo: minishift/minishift 
       minishift_github_url: https://api.github.com/repos
       minishit_release_tag_name: "v1.0.0-beta.1"
@@ -131,14 +127,18 @@ When you run the playbook, be sure to pass the ``--ask-sudo-pass`` option.
         name: pv0001
         path: /data/pv0001/
         size: 5Gi
-      minishift_recreate: yes 
+      minishift_restart: yes 
+      minishift_delete: no
       minishift_start_options:
       - insecure-registry 172.30.0.0/16
       - insecure-registry minishift
       - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
+      openshift_repo: openshift/origin
+      openshift_client_dest: /usr/local/bin
+      openshift_force_client_install: yes
 ```
 
-After you install the role, copy *file/minishift-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. Here's an example of what that might look like:
+After you install the role, copy *file/minishift-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. For example:
 
 ```
 # Install the role 
