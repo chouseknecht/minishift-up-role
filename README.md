@@ -42,59 +42,63 @@ To date this role has been tested on OSX and Fedora 25 Workstation. So with that
 ## Defaults
 
 minishift_repo: minishift/minishift 
+
 > Repo where the minishift binary can be found
 
 minishift_github_url: https://api.github.com/repos
-> GitHub API 
+
+> URL to access GitHub API. 
 
 minishift_release_tag_name: "v1.0.0-beta.1"
+
 > The minishift release to install.
 
 minishift_dest: /usr/local/bin  
+
 > Where to install the minishift binary.
 
 minishift_force_install: yes
+
 > Overwrite any existing minishift binary found at {{ minishift_dest }}
 
-#### minishift_volume:
-
-Object of volume attributes including the following:
-
 ```
-  name: pv0001
-  path: /home/docker/pv0001/
-  size: 5Gi
+minishift_volume:
+   name: pv0001
+   path: /home/docker/pv0001/
+   size: 5Gi
 ```
 
-#### minishift_recreate: yes
+>  Object of volume attributes including the following:
 
-Stop and recreate the existing minishift instance.
+minishift_recreate: yes
 
-#### minishift_delete: no
+> Stop and recreate the existing minishift instance.
 
-When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
+minishift_delete: no
 
-#### minishift_start_options:
-
-Array of `minishift start` command line options. Defaults to the following:
+> When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
 
 ```
-- insecure-registry 172.30.0.0/16
-- insecure-registry minishift
-- iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
+minishift_start_options:
+  - insecure-registry 172.30.0.0/16
+  - insecure-registry minishift
+  - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
 ```
 
-#### openshift_repo: openshift/origin
+> Options to pass to `minishift start`.
 
-GitHub repo for retrieving the OpenShift client.
 
-#### openshift_client_dest: /usr/local/bin
+openshift_repo: openshift/origin
 
-Where to install the OpenShift client binary.
+> GitHub repo for retrieving the OpenShift client.
 
-#### openshift_force_client_install: yes
+openshift_client_dest: /usr/local/bin
 
-Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
+> Where to install the OpenShift client binary.
+
+openshift_force_client_install: yes
+
+> Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
 
 ## Dependencies
 
