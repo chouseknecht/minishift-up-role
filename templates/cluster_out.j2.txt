@@ -1,0 +1,9 @@
+{% set found = false %}
+{% for line in minishift_out.stdout_lines %}
+{% if 'Provisioning' in line %}
+{% set found = true %}
+{% endif %}
+{% if found %}
+{{ line }} 
+{% endif %}
+{% endfor %}

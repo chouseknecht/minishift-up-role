@@ -14,6 +14,7 @@
         path: /data/pv0001/
         size: 5Gi
       minishift_recreate: yes 
+      minishift_delete: yes
       minishift_start_options:
       - insecure-registry 172.30.0.0/16
       - insecure-registry minishift

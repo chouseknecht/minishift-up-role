@@ -1,0 +1,18 @@
+# filter-output.yml
+- name: Create a temp directory
+  command: mktemp -d -t ansible.XXXXXXXXXX
+  register: temp_output
+
+- name: Filter the start output
+  template:
+    src: cluster_out.j2.txt
+    dest: "{{ temp_output.stdout }}/cluster_out.txt"
+
+- name: Get the filter results
+  command: cat "{{ temp_output.stdout }}/cluster_out.txt"
+  register: filtered_output
+
+- name: Remove the temp directory
+  file:
+    path: "{{ temp_output.stdout }}"
+    state: absent
