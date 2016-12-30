@@ -1,6 +1,6 @@
 # minishift-up-role
 
-[![Build Status](https://travis-ci.org/chouseknecht/cluster-up-role.svg?branch=master)](https://travis-ci.org/chouseknecht/minishift-up-role)
+[![Build Status](https://travis-ci.org/chouseknecht/minishift-up-role.svg?branch=master)](https://travis-ci.org/chouseknecht/minishift-up-role)
 
 Install minishift on OSX, Red Hat Linux, and Debian.
 
@@ -21,20 +21,20 @@ To date this role has been tested on OSX and Fedora 25 Workstation. So with that
 
 ## Prerequisites 
 
-### OSX
+##### OSX
 
 - [homebrew](https://brew.sh) 
 - [Ansible 2.2+](https://docs.ansible.com)
 
 
-### Linux
+##### Linux
 
 - KVM installed and working. The role installs the Docker Machine driver for KVM, but it assumes KVM is already alive and funtioning.
 - CPU Virtualization enabled in the system bios
 - Ansible 2.2+
 
 
-### Fedora
+##### Fedora
 
 - python2-dnf, and libselinux-python packages
 
