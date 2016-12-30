@@ -1,0 +1,9 @@
+- name: Create volume path
+  command: minishift ssh "sudo mkdir -m 0777 -p {{ minishift_volume['path'] }}"
+
+- name: Get docker primary group
+  command: minishift ssh "id -gn"
+  register: output
+
+- name: Set volume ownership
+  command: minishift ssh "sudo chown docker:{{ output.stdout }} {{ minishift_volume['path'] }}"

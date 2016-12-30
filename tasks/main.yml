@@ -1,10 +1,15 @@
 ---
-- name: Get the IP address 
-  set_fact:
-    default_ip_address: "{{ ansible_default_ipv4.address }}"
-
 - name: Install Docker machine driver 
   include: "{{ ansible_os_family }}_driver.yml"
+
+- name: Check if oc binary exists
+  stat:
+    path: "{{ openshift_client_dest }}/oc" 
+  register: oc_client
+
+- name: Install the oc client
+  include: install_oc.yml
+  when: not oc_client.stat.exists or openshift_force_client_install 
 
 - name: Check if minishift binary exists
   stat:
@@ -12,7 +17,7 @@
   register: minishift_client
 
 - name: Install minishift 
-  include: install_client.yml
+  include: install_minishift.yml
   when: not minishift_client.stat.exists or minishift_force_install 
 
 - name: Check if running
@@ -25,11 +30,8 @@
 - name: Give cluster-admin to developer
   include: grant_admin.yml 
 
-- name: Create volume path
-  command: minishift ssh "sudo mkdir -m 0777 -p {{ minishift_volume['path'] }}"
-
-- name: Set volume ownership
-  command: minishift ssh "sudo chown docker:staff {{ minishift_volume['path'] }}"
+- name: Create vol path
+  include: create_vol_path.yml
 
 - name: Create objects
   include: create_objects.yml

@@ -34,12 +34,12 @@
   register: assets
 
 - name: Get the Mac asset 
-  include: get_mac_asset.yml
+  include: get_ms_darwin_asset.yml
   with_items: "{{ assets.json }}"
   when: assets is defined and ansible_os_family == 'Darwin'
 
 - name: Get the Linux asset
-  include: get_linux_asset.yml
+  include: get_ms_linux_asset.yml
   with_items: "{{ assets.json }}"
   when: assets is defined and ansible_os_family != 'Darwin' and ansible_os_family != 'Windows'
 

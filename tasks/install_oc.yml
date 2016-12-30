@@ -1,0 +1,82 @@
+# install_oc.yml
+
+- name: Get the latest release
+  uri:
+    url: "{{ minishift_github_url }}/{{ openshift_repo }}/releases/latest"
+  register: release
+
+- name: Set release
+  set_fact:
+    assets_url: "{{ release.json.assets_url }}"
+
+- name: Should have an assets_url 
+  assert:
+    that: assets_url is defined
+
+- name: debug
+  debug:
+    var: assets_url 
+
+- name: Get the list of assets
+  uri:
+    url: "{{ assets_url }}"
+  register: assets
+
+- name: Get the Mac asset 
+  include: get_oc_darwin_asset.yml
+  with_items: "{{ assets.json }}"
+  when: assets is defined and ansible_os_family == 'Darwin'
+
+- name: Get the Linux asset
+  include: get_oc_linux_asset.yml
+  with_items: "{{ assets.json }}"
+  when: "assets is defined and ansible_os_family in ['RedHat', 'Debian']"
+
+- name: Should have an asset_name
+  assert:
+    that: asset_name is defined
+
+- name: Create a temp dir
+  command: mktemp -d -t ansible.XXXXXXXXXX
+  register: temp_output
+
+- name: Download the asset
+  get_url:
+    url: "{{ asset_url }}"
+    dest: "{{ temp_output.stdout }}/{{ asset_name }}" 
+
+- name: Unzip the archive
+  command: "unzip {{ asset_name }}" 
+  args:
+    chdir: "{{ temp_output.stdout }}"
+  when: "'zip' in asset_name"
+
+- name: Untar the archive
+  command: "tar -xvzf {{ asset_name }}" 
+  args:
+    chdir: "{{ temp_output.stdout }}"
+  when: "'tar.gz' in asset_name"
+
+- set_fact: 
+    archive_path: "{{ asset_name | regex_replace('\\.(tar\\.gz|\\zip)', '') }}/" 
+  when: "'tar.gz' in asset_name"
+
+- set_fact: 
+    archive_path: "" 
+  when: "'zip' in asset_name"
+
+- debug: 
+    msg: "Looking for binary - {{ temp_output.stdout }}/{{ archive_path }}oc"
+
+- name: Move the oc executable to the requested directory 
+  copy:
+    src: "{{ temp_output.stdout }}/{{ archive_path }}/oc" 
+    dest: "{{ openshift_client_dest }}/oc"  
+    mode: 0775 
+  become: yes
+  become_user: root 
+
+- name: Remove the temp directory
+  file:
+    path: "{{ temp_output.stdout }}"
+    state: absent

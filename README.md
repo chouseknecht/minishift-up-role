@@ -8,7 +8,8 @@ Created to support the demo and testing needs of [Ansible Container ](https://gi
 
 Specifically, it performs the following tasks:
 
-- Downloads and installs the latest minishift binary
+- Downloads and installs the latest minishift
+- Downloads and installs the OpenShift client
 - Installs the Docker Machine driver for either KVM or Xhyve, depending on the OS
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
@@ -62,13 +63,27 @@ minishift_volume:
 > The name, path, and size of the Persistent Volume to create on the new minishift instance
 
 minishift_recreate: yes
-> Stop and delete an existing minishift instance, along with ~/.minishift. All existing containers and images will be deleted. All certificates found in ~/.minishift will be deleted. Otherwise, if an instance exists, the role will stop with an error.
+> Stop and recreate the existing minishift instance.
 
+minishift_delete: no
+> When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
+
+```
 minishift_start_options:
   - insecure-registry 172.30.0.0/16
   - insecure-registry minishift
   - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
+```
 > Any commandline options to pass to `minishift start`.
+
+openshift_repo: openshift/origin
+> GitHub repo for retrieving the OpenShift client.
+
+openshift_client_dest: /usr/local/bin
+> Where to install the OpenShift client binary.
+
+openshift_force_client_install: yes
+> Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
 
 ## Dependencies
 

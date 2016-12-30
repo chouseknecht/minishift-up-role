@@ -3,13 +3,13 @@
   register: minishift_state
 
 - debug:
-    msg: "Minishift is already running. Use minishift_recreate to continue."
-  when: minishift_state.stdout == 'Running' and not minishift_recreate
+    msg: "Minishift is already running. Use minishift_restart to continue."
+  when: minishift_state.stdout == 'Running' and not minishift_restart
 
-- name: Stop playbook, if running and not recreate
+- name: Stop playbook, if running and not restart
   assert:
     that: true == false
-  when: minishift_state.stdout == 'Running' and not minishift_recreate
+  when: minishift_state.stdout == 'Running' and not minishift_restart
 
 - debug:
     msg: "Shutting down minishift..."
@@ -21,9 +21,10 @@
 
 - name: Deleting minishift
   command: minishift delete
-  when: minishift_state.stdout == 'Running'
+  when: minishift_state.stdout == 'Running' and minishift_delete
 
 - name: Remove ~/.minishift
   file: 
     path: ~/.minishift
     state: absent
+  when: minishift_state.stdout == 'Running' and minishift_delete
