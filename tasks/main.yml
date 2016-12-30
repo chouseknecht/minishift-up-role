@@ -25,7 +25,7 @@
 
 - name: Run minishift
   command: "minishift start --{{ minishift_start_options | join(' --') }}"
-  register: output         
+  register: minishift_out
 
 - name: Give cluster-admin to developer
   include: grant_admin.yml 
@@ -38,5 +38,5 @@
 
 - name: Show output
   debug:
-    var: output.stdout_lines
+    var: minishift_out.stdout_lines
 

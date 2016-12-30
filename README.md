@@ -21,6 +21,8 @@ Supported platforms:
 
 ## Prerequisites 
 
+Prior to running the role, clear your terminal session of any DOCKER* environment variables.
+
 **OSX**
 
 - [homebrew](https://brew.sh) 
