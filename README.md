@@ -31,8 +31,7 @@ Prior to running the role, clear your terminal session of any DOCKER* environmen
 
 **Linux**
 
-- KVM installed and working. The role installs the Docker Machine driver for KVM, but it assumes KVM is already alive and funtioning.
-- CPU Virtualization enabled in the system bios
+- KVM installed and working. The role installs the Docker Machine driver for KVM, but it assumes KVM is already installed, and working.
 - Ansible 2.2+
 
 
