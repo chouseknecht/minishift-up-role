@@ -43,7 +43,7 @@ Prior to running the role, clear your terminal session of any DOCKER* environmen
 
 **Fedora**
 
-- Before accessing the Docker daemon on the minishift instance, you'll need to modify `/etc/sysconfig/docker`. Change this line:
+- Before accessing the Docker daemon on the minishift instance, you'll need to modify the `/etc/sysconfig/docker` script to prevent it from overriding the DOCKER_CERT_PATH environment variable. Edit the file, and change this line:
 
     ```
     DOCKER_CERT_PATH=/etc/docker
@@ -57,7 +57,7 @@ Prior to running the role, clear your terminal session of any DOCKER* environmen
     fi
     ```
 
-- After running `eval $(minishift docker-env)` to set the environment, change the value of DOCKER_API_VERSION, by running the following:
+- After running `eval $(minishift docker-env)` to set the environment, change the value of DOCKER_API_VERSION to match the version of Docker installed on the minishift instance. Run the following:
 
     ```
     $ export DOCKER_API_VERSION=1.22
