@@ -139,7 +139,7 @@ Below is a sample playbook that includes all of the default parameters. You'll f
     - role: chouseknecht.minishift-up-role
       minishift_repo: minishift/minishift 
       minishift_github_url: https://api.github.com/repos
-      minishit_release_tag_name: "v1.0.0-beta.1"
+      minishift_release_tag_name: "v1.0.0-beta.1"
       minishift_dest: /usr/local/bin  
       minishift_force_install: yes
       minishift_volume:
