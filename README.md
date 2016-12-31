@@ -40,6 +40,29 @@ Prior to running the role, clear your terminal session of any DOCKER* environmen
 
 - python2-dnf, and libselinux-python packages
 
+## Known Issues
+
+**Fedora**
+
+- Before accessing the Docker daemon on the minishift instance, you'll need to modify `/etc/sysconfig/docker`. Change this line:
+
+    ```
+    DOCKER_CERT_PATH=/etc/docker
+    ```
+
+    To the following:
+
+    ```
+    if [ -z "${DOCKER_CERT_PATH}" ]; then
+        DOCKER_CERT_PATH=/etc/docker
+    fi
+    ```
+
+- After running `eval $(minishift docker-env)` to set the environment, change the value of DOCKER_API_VERSION, by running the following:
+
+    ```
+    $ export DOCKER_API_VERSION=1.22
+    ```
 
 ## Defaults
 
