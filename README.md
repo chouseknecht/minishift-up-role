@@ -21,7 +21,8 @@ Supported platforms:
 
 ## Prerequisites 
 
-Prior to running the role, clear your terminal session of any DOCKER* environment variables.
+- Prior to running the role, clear your terminal session of any DOCKER* environment variables.
+- sudo access is required for installing packages 
 
 **OSX**
 
@@ -37,19 +38,13 @@ Prior to running the role, clear your terminal session of any DOCKER* environmen
 
 **Fedora**
 
-- python2-dnf, and libselinux-python packages
+- Install packages python2-dnf, and libselinux-python
 
 ## Known Issues
 
 **Fedora**
 
-- Before accessing the Docker daemon on the minishift instance, you'll need to modify the `/etc/sysconfig/docker` script to prevent it from overriding the DOCKER_CERT_PATH environment variable. Edit the file, and change this line:
-
-    ```
-    DOCKER_CERT_PATH=/etc/docker
-    ```
-
-    To the following:
+- Before accessing the Docker daemon on the minishift instance, you'll need to modify the `/etc/sysconfig/docker` script to prevent it from overriding the DOCKER_CERT_PATH environment variable. Edit the file, and change the line `DOCKER_CERT_PATH=/etc/docker` to the following:
 
     ```
     if [ -z "${DOCKER_CERT_PATH}" ]; then
@@ -57,7 +52,7 @@ Prior to running the role, clear your terminal session of any DOCKER* environmen
     fi
     ```
 
-- After running `eval $(minishift docker-env)` to set the environment, change the value of DOCKER_API_VERSION to match the version of Docker installed on the minishift instance. Run the following:
+- After running `eval $(minishift docker-env)` to set the environment, change the value of DOCKER_API_VERSION to match the version of Docker installed on the minishift instance by running the following:
 
     ```
     $ export DOCKER_API_VERSION=1.22

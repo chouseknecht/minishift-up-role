@@ -8,7 +8,7 @@
       minishift_github_url: https://api.github.com/repos
       minishit_release_tag_name: "v1.0.0-beta.1"
       minishift_dest: /usr/local/bin  
-      minishift_force_install: yes
+      minishift_force_install: no 
       minishift_volume:
         name: pv0001
         path: /data/pv0001/

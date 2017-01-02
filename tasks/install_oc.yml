@@ -1,27 +1,5 @@
 # install_oc.yml
 
-- name: Get the latest release
-  uri:
-    url: "{{ minishift_github_url }}/{{ openshift_repo }}/releases/latest"
-  register: release
-
-- name: Set release
-  set_fact:
-    assets_url: "{{ release.json.assets_url }}"
-
-- name: Should have an assets_url 
-  assert:
-    that: assets_url is defined
-
-- name: debug
-  debug:
-    var: assets_url 
-
-- name: Get the list of assets
-  uri:
-    url: "{{ assets_url }}"
-  register: assets
-
 - name: Get the Mac asset 
   include: get_oc_darwin_asset.yml
   with_items: "{{ assets.json }}"

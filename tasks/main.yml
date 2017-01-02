@@ -7,6 +7,9 @@
     path: "{{ openshift_client_dest }}/oc" 
   register: oc_client
 
+- name: Get oc assets
+  include: get_oc_assets.yml
+
 - name: Install the oc client
   include: install_oc.yml
   when: not oc_client.stat.exists or openshift_force_client_install 
@@ -15,6 +18,9 @@
   stat:
     path: "{{ minishift_dest }}/minishift"
   register: minishift_client
+
+- name: Get minishift assets
+  include: get_ms_assets.yml
 
 - name: Install minishift 
   include: install_minishift.yml
