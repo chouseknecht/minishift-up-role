@@ -165,7 +165,7 @@ $ cp ${ANSIBLE_ROLES_PATH}/chouseknecht.minishift-up-role/files/minishift-up.yml
 $ echo "localhost">./inventory
 
 # Run the playbook
-$ ansible-container -i inventory --ask-sudo-pass minishift-up.yml
+$ ansible-playbook -i inventory --ask-sudo-pass minishift-up.yml
 ```
 
 ## Dependencies
