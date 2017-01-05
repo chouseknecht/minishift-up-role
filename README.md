@@ -51,6 +51,7 @@ Supported platforms:
         DOCKER_CERT_PATH=/etc/docker
     fi
     ```
+**Linux/OSX**
 
 - After running `eval $(minishift docker-env)` to set the environment, change the value of DOCKER_API_VERSION to match the version of Docker installed on the minishift instance by running the following:
 
@@ -96,7 +97,7 @@ Supported platforms:
 
 **minishift_delete:** no
 
-> When recreating the minishift instance, perform `minishift delete1`, and delete `~/.minishift`.
+> Perform `minishift delete`, and delete `~/.minishift`.
 
 **minishift_start_options:**
 
