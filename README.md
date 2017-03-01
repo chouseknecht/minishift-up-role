@@ -7,6 +7,7 @@ Installs the latest [minishift](https://github.com/minishift/minishift) binary, 
 Performs the following tasks:
 
 - Downloads and installs the latest minishift binary
+- Copies the latest oc binary from ~/.minishift/cache/oc to a directory in your PATH
 - Installs the Docker Machine driver
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
