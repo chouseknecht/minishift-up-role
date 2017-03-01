@@ -89,7 +89,7 @@ Supported platforms:
    size: 5Gi
 ```
 
->  Object of volume attributes including the following:
+> Object of persistent volume attributes. After starting the minishift instance a persistent volume is automatically added to the OpenShift cluster. Use to modify the attributes of the volume.
 
 **minishift_restart:** yes
 
@@ -99,7 +99,7 @@ Supported platforms:
 
 > Perform `minishift delete`, and delete `~/.minishift`. If you're upgrading, you most likely want to do this. 
 
-**minishift_start_options: []
+**minishift_start_options: []**
 
 > Provide a list of options to pass to `minishift start`.
 
