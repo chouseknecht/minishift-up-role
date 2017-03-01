@@ -2,17 +2,8 @@
 - name: Install Docker machine driver 
   include: "{{ ansible_os_family }}_driver.yml"
 
-- name: Check if oc binary exists
-  stat:
-    path: "{{ openshift_client_dest }}/oc" 
-  register: oc_client
-
-- name: Get oc assets
-  include: get_oc_assets.yml
-
-- name: Install the oc client
-  include: install_oc.yml
-  when: not oc_client.stat.exists or openshift_force_client_install 
+- name: Remove existing minishift instance 
+  include: isrunning.yml 
 
 - name: Check if minishift binary exists
   stat:
@@ -26,12 +17,14 @@
   include: install_minishift.yml
   when: not minishift_client.stat.exists or minishift_force_install 
 
-- name: Check if running
-  include: isrunning.yml 
+- name: Check if oc binary exists
+  stat:
+    path: "{{ openshift_client_dest }}/oc" 
+  register: oc_client
 
-- name: Create a temp dir
-  command: mktemp -d -t ansible.XXXXXXXXXX
-  register: start_temp 
+- name: Copy latest oc client from ~/.minishift
+  include: copy_oc_client.yml 
+  when: not oc_client.stat.exists or openshift_force_client_copy
 
 - name: Run minishift
   command: "minishift start --{{ minishift_start_options | join(' --') }}"

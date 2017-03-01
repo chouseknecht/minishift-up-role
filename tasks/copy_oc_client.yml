@@ -1,0 +1,21 @@
+# copy_oc_client.yml
+---
+- name: Get the path to the oc client
+  find:
+    paths: "{{ lookup('env', 'HOME') }}/.minishift/cache/oc"
+    patterns: "v*"
+    hidden: yes
+    file_type: directory
+  register: versions
+
+- name: Set latest_version
+  set_fact:
+    latest_version: "{{ versions.files | last }}"
+
+- name: Copy oc client
+  copy:
+    src: "{{ latest_version.path }}/oc"
+    dest: "{{ openshift_client_dest }}/oc"
+    remote_src: yes
+  become: yes
+  become_user: root

@@ -35,9 +35,6 @@
     chdir: "{{ temp_output.stdout }}"
   when: asset_name | search('tgz$')
 
-- debug: 
-    msg: "Looking for binary - {{ temp_output.stdout }}/minishift"
-
 - name: Move the executable to the requested directory
   copy:
     src: "{{ temp_output.stdout }}/minishift"

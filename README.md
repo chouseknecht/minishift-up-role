@@ -2,12 +2,11 @@
 
 # minishift-up-role
 
-Installs [minishift](https://github.com/minishift/minishift), and the [OpenShift client](https://github.com/openshift/origin), and creates a running minishift instance.
+Installs the latest [minishift](https://github.com/minishift/minishift) binary, and creates a minishift instance.
 
 Performs the following tasks:
 
-- Downloads and installs the latest minishift
-- Downloads and installs the OpenShift client
+- Downloads and installs the latest minishift binary
 - Installs the Docker Machine driver
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
@@ -69,9 +68,9 @@ Supported platforms:
 
 > URL to access GitHub API. 
 
-**minishift_release_tag_name:** "v1.0.0-beta.1"
+**minishift_release_tag_name:** ""
 
-> The minishift release to install.
+> Defaults to installing the latest release. Use to install a specific minishift release.
 
 **minishift_dest:** /usr/local/bin**
 
@@ -95,29 +94,19 @@ Supported platforms:
 
 > Stop and recreate the existing minishift instance.
 
-**minishift_delete:** no
+**minishift_delete:** yes
 
-> Perform `minishift delete`, and delete `~/.minishift`.
+> Perform `minishift delete`, and delete `~/.minishift`. If you're upgrading, you most likely want to do this. 
 
-**minishift_start_options:**
+**minishift_start_options: []
 
-```
-  - insecure-registry 172.30.0.0/16
-  - insecure-registry minishift
-  - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
-```
-
-> Options to pass to `minishift start`.
-
-**openshift_repo:** openshift/origin
-
-> GitHub repo for retrieving the OpenShift client.
+> Provide a list of options to pass to `minishift start`.
 
 **openshift_client_dest:** /usr/local/bin
 
 > Where to install the OpenShift client binary.
 
-**openshift_force_client_install:** yes
+**openshift_force_client_copy:** yes
 
 > Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
 
@@ -135,7 +124,7 @@ Below is a sample playbook that includes all of the default parameters. You'll f
     - role: chouseknecht.minishift-up-role
       minishift_repo: minishift/minishift 
       minishift_github_url: https://api.github.com/repos
-      minishift_release_tag_name: "v1.0.0-beta.1"
+      minishift_release_tag_name: ""
       minishift_dest: /usr/local/bin  
       minishift_force_install: yes
       minishift_volume:
@@ -143,14 +132,10 @@ Below is a sample playbook that includes all of the default parameters. You'll f
         path: /data/pv0001/
         size: 5Gi
       minishift_restart: yes 
-      minishift_delete: no
-      minishift_start_options:
-      - insecure-registry 172.30.0.0/16
-      - insecure-registry minishift
-      - iso-url https://github.com/minishift/minishift-centos-iso/releases/download/v1.0.0-alpha.1/minishift-centos.iso
-      openshift_repo: openshift/origin
+      minishift_delete: yes 
+      minishift_start_options: []
       openshift_client_dest: /usr/local/bin
-      openshift_force_client_install: yes
+      openshift_force_client_copy: yes
 ```
 
 After you install the role, copy *file/minishift-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. For example:
