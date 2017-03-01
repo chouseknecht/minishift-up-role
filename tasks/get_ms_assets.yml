@@ -4,23 +4,23 @@
   uri:
     url: "{{ minishift_github_url }}/{{ minishift_repo }}/releases/tags/{{ minishift_release_tag_name }}"
   register: release
-  when: minishift_release_tag_name is defined
+  when: minishift_release_tag_name != '' 
 
 - name: Set release
   set_fact:
     assets_url: "{{ release.json.assets_url }}"
-  when: minishift_release_tag_name is defined
+  when: minishift_release_tag_name != '' 
 
 - name: Get the latest release
   uri:
     url: "{{ minishift_github_url }}/{{ minishift_repo }}/releases/latest"
   register: release
-  when: minishift_release_tag_name is not defined
+  when: minishift_release_tag_name == '' 
 
 - name: Set release
   set_fact:
     assets_url: "{{ release.json.assets_url }}"
-  when: minishift_release_tag_name is not defined
+  when: minishift_release_tag_name == '' 
 
 - name: Should have an assets_url
   assert:
