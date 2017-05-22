@@ -11,9 +11,18 @@ Performs the following tasks:
 - Installs the Docker Machine driver
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
-- Adds a hostname to /etc/hosts for accessing the local registry
+- Creates a route to the internal registry
+- Adds a hostname to /etc/hosts for accessing the internal registry
 
-Supported platforms: 
+## Accessing the registry 
+
+After the role executes, and minishift is running, you will be able to access the internal registry using the `openshift_hostname` value. The default vaule is `local.openshift`. For example, log in by running the following:
+
+```
+$ docker login -u developer -p $(oc whoami -t) https://local.openshift
+```
+
+## Supported platforms: 
 
 - Debian
 - Red Hat
