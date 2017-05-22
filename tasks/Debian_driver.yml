@@ -22,10 +22,10 @@
   command: whoami
   register: output   
 
-- name: Add current uer to libvirtd group
+- name: Add current uer to libvirt group
   user:
     name: "{{ output.stdout }}"
-    groups: libvirtd
+    groups: libvirt
     append: yes 
   become: yes
   become_user: root
