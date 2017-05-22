@@ -117,10 +117,6 @@ Below is a sample playbook that includes all of the default parameters. You'll f
       minishift_release_tag_name: ""
       minishift_dest: /usr/local/bin  
       minishift_force_install: yes
-      minishift_volume:
-        name: pv0001
-        path: /data/pv0001/
-        size: 5Gi
       minishift_restart: yes 
       minishift_delete: yes 
       minishift_start_options: []
