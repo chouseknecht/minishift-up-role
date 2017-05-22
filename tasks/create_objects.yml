@@ -19,18 +19,8 @@
     src: route.j2.yml
     dest: "{{ tmp_path }}/route.yml" 
 
-- name: Template pv.yml 
-  template: 
-    src: pv.j2.yml
-    dest: "{{ tmp_path }}/pv.yml" 
-
 - name: Create the route
   command: oc create -f route.yml 
-  args:
-    chdir: "{{ tmp_path }}" 
-
-- name: Create the volume 
-  command: oc create -f pv.yml 
   args:
     chdir: "{{ tmp_path }}" 
 

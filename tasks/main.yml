@@ -24,9 +24,6 @@
 - name: Give cluster-admin to developer
   include: grant_admin.yml 
 
-- name: Create vol path
-  include: create_vol_path.yml
-
 - name: Create objects
   include: create_objects.yml
 

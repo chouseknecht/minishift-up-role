@@ -11,7 +11,6 @@ Performs the following tasks:
 - Installs the Docker Machine driver
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
-- Adds a persistent volume
 
 Supported platforms: 
 
@@ -81,23 +80,13 @@ Supported platforms:
 
 > Overwrite any existing minishift binary found at {{ minishift_dest }}
 
-**minishift_volume:**
-
-```
-   name: pv0001
-   path: /home/docker/pv0001/
-   size: 5Gi
-```
-
-> Object of persistent volume attributes. After starting the minishift instance a persistent volume is automatically added to the OpenShift cluster. Use to modify the attributes of the volume.
-
 **minishift_restart:** yes
 
 > Stop and recreate the existing minishift instance.
 
 **minishift_delete:** yes
 
-> Perform `minishift delete`, and delete `~/.minishift`. If you're upgrading, you most likely want to do this. 
+> Perform `minishift delete`, and remove `~/.minishift`. If you're upgrading, you most likely want to do this. 
 
 **minishift_start_options: []**
 

@@ -2,14 +2,10 @@
 minishift_repo: minishift/minishift 
 minishift_github_url: https://api.github.com/repos
 minishift_release_tag_name: ""
-minishift_dest: /usr/local/bin  
 minishift_force_install: yes
-minishift_volume:
-  name: pv0001
-  path: /home/docker/pv0001/
-  size: 5Gi
 minishift_restart: yes
 minishift_delete: yes 
 minishift_start_options: []
+minishift_dest: /usr/local/bin  
 openshift_client_dest: /usr/local/bin
 openshift_force_client_copy: yes 
