@@ -24,9 +24,6 @@
 - name: Give cluster-admin to developer
   include: grant_admin.yml 
 
-- name: Create objects
-  include: create_objects.yml
-
 - name: Check if oc binary exists
   stat:
     path: "{{ openshift_client_dest }}/oc" 
@@ -35,6 +32,9 @@
 - name: Copy latest oc client from ~/.minishift
   include: copy_oc_client.yml 
   when: not oc_client.stat.exists or openshift_force_client_copy
+
+- name: Add entry to /etc/hosts
+  include: add_hostname.yml  
 
 - name: Filter start output
   include: filter_output.yml

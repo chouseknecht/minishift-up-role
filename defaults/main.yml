@@ -9,3 +9,4 @@ minishift_start_options: []
 minishift_dest: /usr/local/bin  
 openshift_client_dest: /usr/local/bin
 openshift_force_client_copy: yes 
+openshift_hostname: local.openshift

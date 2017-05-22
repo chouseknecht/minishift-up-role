@@ -11,6 +11,7 @@ Performs the following tasks:
 - Installs the Docker Machine driver
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
+- Adds a hostname to /etc/hosts that you can use to access the local registry
 
 Supported platforms: 
 
@@ -100,6 +101,10 @@ Supported platforms:
 
 > Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
 
+**openshift_hostname: local.openshift**
+> The hostname you'll use to reference the local registry when you're ready to push images. Gets added to `/etc/hosts`.
+
+
 ## Example Playbook
 
 Below is a sample playbook that includes all of the default parameters. You'll find this exact example in [files/minishift-up.yml](files/minishift-up.yml):
@@ -122,6 +127,7 @@ Below is a sample playbook that includes all of the default parameters. You'll f
       minishift_start_options: []
       openshift_client_dest: /usr/local/bin
       openshift_force_client_copy: yes
+      openshift_hostname: local.openshift
 ```
 
 After you install the role, copy *file/minishift-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. For example:

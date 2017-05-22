@@ -1,0 +1,20 @@
+- name: Get the instance IP address
+  command: minishift ip
+  register: default_ip
+
+- name: Remove hostname
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '{{ openshift_hostname }}' 
+    state: absent 
+  become: yes
+  become_user: root
+    
+- name: Add hostname
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^{{ default_ip.stdout }}'
+    line: "{{ default_ip.stdout }}  {{ openshift_hostname }}"
+  become: yes
+  become_user: root
+
