@@ -33,6 +33,9 @@
   include: copy_oc_client.yml 
   when: not oc_client.stat.exists or openshift_force_client_copy
 
+- name: Create objects
+  include: create_objects.yml
+
 - name: Add entry to /etc/hosts
   include: add_hostname.yml  
 
