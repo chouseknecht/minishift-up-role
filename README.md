@@ -101,7 +101,7 @@ Supported platforms:
 
 > Overwrite any existing OpenShift client binary found at {{ openshift_client_dest }}. 
 
-**openshift_hostname: local.openshift**
+**openshift_hostname:** local.openshift
 > The hostname you'll use to reference the local registry when you're ready to push images. Gets added to `/etc/hosts`.
 
 
