@@ -14,7 +14,7 @@ Performs the following tasks:
 - Creates a route to the internal registry
 - Adds a hostname to /etc/hosts for accessing the internal registry
 
-## Accessing the registry 
+### Accessing the registry 
 
 After the role executes, and minishift is running, you will be able to access the internal registry using the `openshift_hostname` value. The default vaule is `local.openshift`. For example, log in by running the following:
 
