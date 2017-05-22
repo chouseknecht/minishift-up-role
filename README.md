@@ -11,7 +11,7 @@ Performs the following tasks:
 - Installs the Docker Machine driver
 - Creates a minishift instance 
 - Grants cluster admin to the *developer* account
-- Adds a hostname to /etc/hosts that you can use to access the local registry
+- Adds a hostname to /etc/hosts for accessing the local registry
 
 Supported platforms: 
 
