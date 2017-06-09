@@ -31,5 +31,5 @@
   become_user: root
 
 - name: Refresh user groups
-  shell: newgrp libvirtd
+  shell: newgrp libvirt
     
