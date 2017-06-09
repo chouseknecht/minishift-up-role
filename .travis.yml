@@ -7,7 +7,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - pip install ansible
+  - pip install https://github.com/ansible/ansible/archive/devel.tar.gz 
 
 script:
   # Run tests
