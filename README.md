@@ -57,21 +57,14 @@ When the Minishift VM is started, the /Users volume will be mounted to the VM. T
 
 **Fedora**
 
-- Before accessing the Docker daemon on the minishift instance, you'll need to modify the `/etc/sysconfig/docker` script to prevent it from overriding the DOCKER_CERT_PATH environment variable. Edit the file, and change the line `DOCKER_CERT_PATH=/etc/docker` to the following:
+- Before accessing the Docker daemon on the Minishift instance, you'll need to modify the `/etc/sysconfig/docker` script to prevent it from overriding the DOCKER_CERT_PATH environment variable. Edit the file, and change the line `DOCKER_CERT_PATH=/etc/docker` to the following:
 
     ```
     if [ -z "${DOCKER_CERT_PATH}" ]; then
         DOCKER_CERT_PATH=/etc/docker
     fi
     ```
-**Linux/OSX**
-
-- After running `eval $(minishift docker-env)` to set the environment, change the value of DOCKER_API_VERSION to match the version of Docker installed on the minishift instance by running the following:
-
-    ```
-    $ export DOCKER_API_VERSION=1.22
-    ```
-
+    
 ## Defaults
 
 **minishift_repo:** minishift/minishift
@@ -143,7 +136,7 @@ Below is a sample playbook that includes all of the default parameters. You'll f
       openshift_hostname: local.openshift
 ```
 
-After you install the role, copy *file/minishift-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. For example:
+After you install the role, copy *files/minishift-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. For example:
 
 ```
 # Install the role 
