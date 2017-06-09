@@ -30,6 +30,7 @@ $ docker login -u developer -p $(oc whoami -t) https://local.openshift
 
 ## Prerequisites 
 
+- Ansible 2.4+
 - Prior to running the role, clear your terminal session of any DOCKER* environment variables.
 - sudo access is required for installing packages 
 

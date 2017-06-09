@@ -1,12 +1,12 @@
 # install_minishift.yml 
 
 - name: Get the Mac asset 
-  include: get_ms_darwin_asset.yml
+  include_tasks: get_ms_darwin_asset.yml
   with_items: "{{ assets.json }}"
   when: assets is defined and ansible_os_family == 'Darwin'
 
 - name: Get the Linux asset
-  include: get_ms_linux_asset.yml
+  include_tasks: get_ms_linux_asset.yml
   with_items: "{{ assets.json }}"
   when: assets is defined and ansible_os_family != 'Darwin' and ansible_os_family != 'Windows'
 

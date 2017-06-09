@@ -1,6 +1,6 @@
 ---
 - name: Install Docker machine driver 
-  include: "{{ ansible_os_family }}_driver.yml"
+  include_tasks: "{{ ansible_os_family }}_driver.yml"
 
 - name: Check if minishift binary exists
   stat:
@@ -8,14 +8,14 @@
   register: minishift_client
 
 - name: Get minishift assets
-  include: get_ms_assets.yml
+  include_tasks: get_ms_assets.yml
 
 - name: Install minishift 
-  include: install_minishift.yml
+  include_tasks: install_minishift.yml
   when: not minishift_client.stat.exists or minishift_force_install 
 
 - name: Remove existing minishift instance 
-  include: isrunning.yml 
+  include_tasks: isrunning.yml 
 
 - name: Run minishift
   command: "minishift start --{{ minishift_start_options | join(' --') }}"
@@ -25,7 +25,7 @@
   register: minishift_out
 
 - name: Give cluster-admin to developer
-  include: grant_admin.yml 
+  include_tasks: grant_admin.yml 
 
 - name: Check if oc binary exists
   stat:
@@ -33,17 +33,17 @@
   register: oc_client
 
 - name: Copy latest oc client from ~/.minishift
-  include: copy_oc_client.yml 
+  include_tasks: copy_oc_client.yml 
   when: not oc_client.stat.exists or openshift_force_client_copy
 
 - name: Create objects
-  include: create_objects.yml
+  include_tasks: create_objects.yml
 
 - name: Add entry to /etc/hosts
-  include: add_hostname.yml  
+  include_tasks: add_hostname.yml  
 
 - name: Filter start output
-  include: filter_output.yml
+  include_tasks: filter_output.yml
 
 - name: Show output
   debug:
