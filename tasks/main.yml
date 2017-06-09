@@ -19,6 +19,9 @@
 
 - name: Run minishift
   command: "minishift start --{{ minishift_start_options | join(' --') }}"
+  environment:
+    # Enable mounting /Users to the VM on OSX
+    XHYVE_VIRTIO_9P: true
   register: minishift_out
 
 - name: Give cluster-admin to developer

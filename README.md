@@ -33,19 +33,22 @@ $ docker login -u developer -p $(oc whoami -t) https://local.openshift
 - Prior to running the role, clear your terminal session of any DOCKER* environment variables.
 - sudo access is required for installing packages 
 
-**OSX**
+### OSX
 
 - [homebrew](https://brew.sh) 
 - [Ansible 2.2+](https://docs.ansible.com)
 
+#### Mounting /Users to the Minishift VM
 
-**Linux**
+When the Minishift VM is started, the /Users volume will be mounted to the VM. This is done by setting the environment variable `XHYVE_VIRTIO_9P=true`. The variable is set temporarily during the :q
+
+## Linux
 
 - KVM installed and working. The role installs the Docker Machine driver for KVM, but it assumes KVM is already installed, and working.
 - Ansible 2.2+
 
 
-**Fedora**
+## Fedora
 
 - Install packages python2-dnf, and libselinux-python
 
