@@ -22,7 +22,7 @@
   command: whoami
   register: output   
 
-- name: Add current uer to libvirt group
+- name: Add current user to libvirt group
   user:
     name: "{{ output.stdout }}"
     groups: libvirt
