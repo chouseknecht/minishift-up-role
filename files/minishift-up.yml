@@ -7,7 +7,7 @@
     - role: chouseknecht.minishift-up-role
       minishift_repo: minishift/minishift 
       minishift_github_url: https://api.github.com/repos
-      minishit_release_tag_name: ""
+      minishift_release_tag_name: ""
       minishift_dest: /usr/local/bin  
       minishift_force_install: yes
       minishift_restart: yes 
