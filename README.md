@@ -136,7 +136,7 @@ Below is a sample playbook that includes all of the default parameters. You'll f
       openshift_hostname: local.openshift
 ```
 
-After you install the role, copy *files/minishift-up.yml* to your project directory, and execute it with the `--ask-sudo-pass` option. For example:
+After you install the role, copy *files/minishift-up.yml* to your project directory, and execute it with the `--ask-become-pass` option. For example:
 
 ```
 # Install the role 
@@ -149,7 +149,7 @@ $ cp ${ANSIBLE_ROLES_PATH}/chouseknecht.minishift-up-role/files/minishift-up.yml
 $ echo "localhost">./inventory
 
 # Run the playbook
-$ ansible-playbook -i inventory --ask-sudo-pass minishift-up.yml
+$ ansible-playbook -i inventory --ask-become-pass minishift-up.yml
 ```
 
 ## Dependencies
