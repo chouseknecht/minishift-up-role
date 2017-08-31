@@ -113,7 +113,7 @@ When the Minishift VM is started, the /Users volume will be mounted to the VM. T
 
 ## Example Playbook
 
-Below is a sample playbook that includes all of the default parameters. You'll find this exact example in [files/minishift-up.yml](files/minishift-up.yml):
+Below is a sample playbook that includes all of the default parameters. You'll find this exact example in the root of the project tree. 
 
 ```
 ---
@@ -136,14 +136,14 @@ Below is a sample playbook that includes all of the default parameters. You'll f
       openshift_hostname: local.openshift
 ```
 
-After you install the role, copy *files/minishift-up.yml* to your project directory, and execute it with the `--ask-become-pass` option. For example:
+After you install the role, copy *minishift-up.yml* to your project directory, and execute it with the `--ask-become-pass` option. For example:
 
 ```
 # Install the role 
 $ ansible-galaxy install chouseknecht.minishift-up-role
 
 # Copy the playbook from your roles path to the current working directory 
-$ cp ${ANSIBLE_ROLES_PATH}/chouseknecht.minishift-up-role/files/minishift-up.yml .
+$ cp ${ANSIBLE_ROLES_PATH}/chouseknecht.minishift-up-role/minishift-up.yml .
 
 # Create a localhost inventory file
 $ echo "localhost">./inventory

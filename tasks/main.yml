@@ -17,12 +17,14 @@
 - name: Remove existing minishift instance 
   include_tasks: isrunning.yml 
 
+# Seems to always end with a non-zero return code, even on success
 - name: Run minishift
   command: "minishift start --{{ minishift_start_options | join(' --') }}"
   environment:
     # Enable mounting /Users to the VM on OSX
     XHYVE_VIRTIO_9P: true
   register: minishift_out
+  ignore_errors: yes
 
 - name: Give cluster-admin to developer
   include_tasks: grant_admin.yml 
