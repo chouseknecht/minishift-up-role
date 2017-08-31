@@ -1,5 +1,0 @@
-{% for line in minishift_out.stdout_lines %}
-{% if 'MiB' not in line %}
-{{ line }} 
-{% endif %}
-{% endfor %}

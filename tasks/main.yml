@@ -1,4 +1,6 @@
+# main.yml
 ---
+
 - name: Install Docker machine driver 
   include_tasks: "{{ ansible_os_family }}_driver.yml"
 
@@ -17,14 +19,22 @@
 - name: Remove existing minishift instance 
   include_tasks: isrunning.yml 
 
-# Seems to always end with a non-zero return code, even on success
+# Lately seems to always end with a non-zero return code, even on success
 - name: Run minishift
-  command: "minishift start --{{ minishift_start_options | join(' --') }}"
+  shell: "minishift start --{{ minishift_start_options | join(' --') }} >/tmp/minishift.out 2>&1"
   environment:
     # Enable mounting /Users to the VM on OSX
     XHYVE_VIRTIO_9P: true
-  register: minishift_out
   ignore_errors: yes
+
+- name: Grab the minishift output, stripping any special chars 
+  shell: cat /tmp/minishift.out | tr -dc '[:print:]\n\r' | grep -v '==='
+  register: minishift_out
+
+- name: Cleanup output file
+  file:
+    path: /tmp/minishift.out
+    state: absent
 
 - name: Give cluster-admin to developer
   include_tasks: grant_admin.yml 
@@ -44,10 +54,7 @@
 - name: Add entry to /etc/hosts
   include_tasks: add_hostname.yml  
 
-- name: Filter start output
-  include_tasks: filter_output.yml
-
 - name: Show output
   debug:
-    var: filtered_output.stdout_lines 
+    var: minishift_out  
 
