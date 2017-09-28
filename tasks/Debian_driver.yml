@@ -6,7 +6,6 @@
     dest: /usr/local/bin/docker-machine-driver-kvm
     mode: 0755 
   become: yes
-  become_user: root
 
 - name: Install packages 
   apt:
@@ -16,7 +15,6 @@
   - libvirt-bin
   - qemu-kvm
   become: yes
-  become_user: root
 
 - name: Get current user
   command: whoami
@@ -28,7 +26,6 @@
     groups: libvirt
     append: yes 
   become: yes
-  become_user: root
 
 - name: Refresh user groups
   shell: newgrp libvirt

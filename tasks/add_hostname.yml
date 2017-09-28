@@ -8,7 +8,6 @@
     regexp: '{{ openshift_hostname }}' 
     state: absent 
   become: yes
-  become_user: root
     
 - name: Add hostname
   lineinfile:
@@ -16,5 +15,4 @@
     regexp: '^{{ default_ip.stdout }}'
     line: "{{ default_ip.stdout }}  {{ openshift_hostname }}"
   become: yes
-  become_user: root
 

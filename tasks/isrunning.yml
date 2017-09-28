@@ -1,6 +1,7 @@
 - name: Check if minishift is running
   command: minishift status
   register: minishift_state
+  ignore_errors: yes
 
 - debug:
     msg: "Minishift is already running. Use minishift_restart to continue."
@@ -20,13 +21,15 @@
   when: minishift_state.stdout == 'Running'
 
 - name: Deleting minishift
-  command: minishift delete
+  command: minishift delete --force
   when: minishift_delete
   ignore_errors: yes
+  become: yes
 
 - name: Remove ~/.minishift
   file: 
     path: ~/.minishift
     state: absent
   when: minishift_delete
+  become: yes
 

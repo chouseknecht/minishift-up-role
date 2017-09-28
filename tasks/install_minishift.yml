@@ -42,7 +42,6 @@
     remote_src: yes
     mode: 0775 
   become: yes
-  become_user: root 
 
 - name: Remove the temp directory
   file:
