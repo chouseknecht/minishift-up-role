@@ -35,9 +35,13 @@
     chdir: "{{ temp_output.stdout }}"
   when: asset_name | search('tgz$')
 
+- name: Get the tgz dir name
+  shell: 'echo {{ asset_name}} | sed "s/.zip$//" | sed "s/.tgz$//"'
+  register: asset_dir
+
 - name: Move the executable to the requested directory
   copy:
-    src: "{{ temp_output.stdout }}/minishift"
+    src: "{{ temp_output.stdout }}/{{ asset_dir.stdout }}/minishift"
     dest: "{{ minishift_dest }}/minishift"
     remote_src: yes
     mode: 0775 
