@@ -1,7 +1,7 @@
 # main.yml
 ---
 
-- name: Install Docker machine driver 
+- name: Install Docker machine driver
   include_tasks: "{{ ansible_os_family }}_driver.yml"
 
 - name: Check if minishift binary exists
@@ -12,12 +12,12 @@
 - name: Get minishift assets
   include_tasks: get_ms_assets.yml
 
-- name: Install minishift 
+- name: Install minishift
   include_tasks: install_minishift.yml
-  when: not minishift_client.stat.exists or minishift_force_install 
+  when: not minishift_client.stat.exists or minishift_force_install
 
-- name: Remove existing minishift instance 
-  include_tasks: isrunning.yml 
+- name: Remove existing minishift instance
+  include_tasks: isrunning.yml
 
 # Lately seems to always end with a non-zero return code, even on success
 - name: Run minishift
@@ -27,7 +27,7 @@
     XHYVE_VIRTIO_9P: true
   ignore_errors: yes
 
-- name: Grab the minishift output, stripping any special chars 
+- name: Grab the minishift output, stripping any special chars
   shell: cat /tmp/minishift.out | tr -dc '[:print:]\n\r' | grep -v '==='
   register: minishift_out
 
@@ -36,28 +36,27 @@
     path: /tmp/minishift.out
     state: absent
 
+- name: Check if oc binary exists
+  stat:
+    path: "{{ openshift_client_dest }}/oc"
+  register: oc_client
+
+- name: Copy latest oc client from ~/.minishift
+  include_tasks: copy_oc_client.yml
+  when: not oc_client.stat.exists or openshift_force_client_copy
+
 - name: Switch the kube config context
   shell: "{{ openshift_client_dest }}/oc config use-context /$(minishift ip | tr . -):8443/developer"
 
 - name: Give cluster-admin to developer
-  include_tasks: grant_admin.yml 
-
-- name: Check if oc binary exists
-  stat:
-    path: "{{ openshift_client_dest }}/oc" 
-  register: oc_client
-
-- name: Copy latest oc client from ~/.minishift
-  include_tasks: copy_oc_client.yml 
-  when: not oc_client.stat.exists or openshift_force_client_copy
+  include_tasks: grant_admin.yml
 
 - name: Create objects
   include_tasks: create_objects.yml
 
 - name: Add entry to /etc/hosts
-  include_tasks: add_hostname.yml  
+  include_tasks: add_hostname.yml
 
 - name: Show output
   debug:
-    var: minishift_out  
-
+    var: minishift_out
