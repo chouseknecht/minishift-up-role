@@ -21,7 +21,7 @@
 
 # Lately seems to always end with a non-zero return code, even on success
 - name: Run minishift
-  shell: "minishift start --{{ minishift_start_options | join(' --') }} >/tmp/minishift.out 2>&1"
+  shell: "minishift start {{ minishift_start_options | join(' ') }} >/tmp/minishift.out 2>&1"
   environment:
     # Enable mounting /Users to the VM on OSX
     XHYVE_VIRTIO_9P: true
@@ -59,4 +59,5 @@
 
 - name: Show output
   debug:
-    var: minishift_out
+    var: minishift_out.stdout_lines
+

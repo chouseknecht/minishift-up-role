@@ -97,7 +97,7 @@ When the Minishift VM is started, the /Users volume will be mounted to the VM. T
 
 **minishift_start_options: []**
 
-> Provide a list of options to pass to `minishift start`.
+> Provide a list of options to pass to `minishift start`. For example: `['--memory', '4GB', '--cpus', '4']`
 
 **openshift_client_dest:** /usr/local/bin
 

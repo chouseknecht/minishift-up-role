@@ -15,9 +15,9 @@
   command: oc create -f route.yml 
   args:
     chdir: "{{ tmp_path }}" 
+  ignore_errors: yes
 
 - name: Remove the temp directory
   file:
     path: "{{ tmp_path }}"
     state: absent
-

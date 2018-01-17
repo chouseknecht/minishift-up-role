@@ -5,20 +5,20 @@
 
 - debug:
     msg: "Minishift is already running. Use minishift_restart to continue."
-  when: minishift_state.stdout == 'Running' and not minishift_restart
+  when: "'Running' in minishift_state.stdout and not minishift_restart"
 
 - name: Stop playbook, if running and not restart
   assert:
     that: true == false
-  when: minishift_state.stdout == 'Running' and not minishift_restart
+  when: "'Running' in minishift_state.stdout and not minishift_restart"
 
 - debug:
     msg: "Shutting down minishift..."
-  when: minishift_state.stdout == 'Running'
+  when: "'Running' in minishift_state.stdout"
 
 - name: Shutdown minishift
   command: minishift stop
-  when: minishift_state.stdout == 'Running'
+  when: "'Running' in minishift_state.stdout"
 
 - name: Deleting minishift
   command: minishift delete --force
