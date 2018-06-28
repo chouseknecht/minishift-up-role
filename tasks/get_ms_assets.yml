@@ -34,4 +34,3 @@
   uri:
     url: "{{ assets_url }}"
   register: assets
-

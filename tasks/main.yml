@@ -60,4 +60,3 @@
 - name: Show output
   debug:
     var: minishift_out.stdout_lines
-

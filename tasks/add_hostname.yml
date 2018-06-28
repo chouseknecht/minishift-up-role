@@ -15,4 +15,3 @@
     regexp: '^{{ default_ip.stdout }}'
     line: "{{ default_ip.stdout }}  {{ openshift_hostname }}"
   become: yes
-

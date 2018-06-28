@@ -32,4 +32,3 @@
     state: absent
   when: minishift_delete
   become: yes
-

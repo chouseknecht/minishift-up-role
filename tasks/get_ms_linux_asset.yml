@@ -3,4 +3,3 @@
     asset_url: "{{ item.browser_download_url }}"
     asset_name: "{{ item.browser_download_url | basename }}"
   when: item.name | search('linux-amd64.tgz$')
-
