@@ -122,7 +122,7 @@ Below is a sample playbook that includes all of the default parameters. You'll f
   connection: local
   gather_facts: yes
   roles:
-    - role: chouseknecht.minishift-up-role
+    - role: chouseknecht.minishift
       minishift_repo: minishift/minishift 
       minishift_github_url: https://api.github.com/repos
       minishift_release_tag_name: ""
