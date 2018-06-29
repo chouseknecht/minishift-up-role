@@ -2,6 +2,7 @@ galaxy_info:
   author: Chris Houseknecht 
   description: Run OpenShift locally using minishift
   company: Ansible by Red Hat 
+  role_name: minishift
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
