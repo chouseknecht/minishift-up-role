@@ -1,7 +1,7 @@
 # Darwin_driver.yml 
 
 - name: Check if docker-machine-driver-xhyve is installed
-  command: brew info --installed docker-machine-driver-xhyve
+  command: brew info docker-machine-driver-xhyve
   register: output
 
 - name: Install docker-machine-driver-xhyve 
