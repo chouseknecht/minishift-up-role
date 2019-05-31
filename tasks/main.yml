@@ -46,7 +46,7 @@
   when: not oc_client.stat.exists or openshift_force_client_copy
 
 - name: Switch the kube config context
-  shell: "{{ openshift_client_dest }}/oc config use-context /$(minishift ip | tr . -):8443/developer"
+  shell: "{{ openshift_client_dest }}/oc config use-context myproject/$(minishift ip | tr . -):8443/developer"
 
 - name: Give cluster-admin to developer
   include_tasks: grant_admin.yml
